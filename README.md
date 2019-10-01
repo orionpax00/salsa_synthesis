@@ -1,5 +1,13 @@
 # Transformers For Pose
 
+## Installation
+
+```bash
+git clone https://github.com/orionpax00/transformers-for-pose.git
+cd transformers-for-pose
+virtualenv env
+pip install -e . ## for those who want to develop
+```
 
 ## Contributing
 
