@@ -1,7 +1,10 @@
 import os
 import glob
 import math
+import json
 
+#module level imports
+from ..config.config import SPLIT_JSON_LOC
 
 class Split:
 		
@@ -15,12 +18,17 @@ class Split:
 		## function
 		self.getfiles = self.get_files()
 	
+	def check_com(self):
+		## json file should be present in config folder
+		json_file_loc = 
+		json.load()	
 	def get_files(self):
 		all_numpy_files_loc = [x if x[-3:] == "npy" or x[-3:] == "npz" for x in os.listdir(self.loaction)]
 		return all_numpy_files_loc
 
 	def gen_split(self):
 		""" function to divide trails into train trials and split trails"""
+		
 		files = self.getfiles() 
 		num_test_trails = math.floor(len(files) * self.split_size)
 		
