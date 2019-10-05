@@ -162,9 +162,9 @@ class GetData:
 		with open(self.label_file) as jsonfile:
 			data_files = json.load(jsonfile)[self.category]
 
-			for file in data_files:
-				sub,trail = files.split("_")
-				data = np.load(os.path.join(self.data_loc,sub,file+".npy"))
+			for file_ in data_files:
+				sub,trail = file_.split("_")
+				data = np.load(os.path.join(self.data_loc,sub,file_+".npy"))
 				data_ = transform.transform(data)
 
-				np.save(os.path.join(sav_dat_fol,file+".npy"),data_)
+				np.save(os.path.join(sav_dat_fol,file_+".npy"),data_)
