@@ -76,6 +76,6 @@ class Split:
 
 		comp_data.random.shuffle(comp_data)
 
-		np.save(os.path.join(self.folder_location,'data','data.npy'), np.asarray(comp_data))
+		# np.save(os.path.join(self.folder_location,'data','data.npy'), np.asarray(comp_data))
 
-		return None
+		return np.asarray(comp_data)

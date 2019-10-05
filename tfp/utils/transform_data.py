@@ -1,6 +1,7 @@
 from scipy.signal import savgol_filter
 import numpy as np
-
+import os 
+import json
 import tfp.config.config as config
 
 
@@ -142,3 +143,28 @@ class Transformation:
         cart_abs_joints = get_abs_joint_locations(cart_rel_joints, sk_data=sk_data)
 
         return cart_abs_joints
+
+class GetData:
+	def __init__(self, data_location, catergory, num_joints = 15):
+		self.data_loc = data_location
+		self.category = category
+		self.num_joints = num_joints
+		self.label_file = config.LABEL_JSON_LOC
+
+	def getdata(self):
+		sav_dat_fol = os.path.join(os.getcwd,self.category)
+		transform = Transform(self.num_joints)
+		if os.path.exists(sav_dat_fol):
+			continue
+		else:
+			os.mkdir(sav_dat_fol)
+
+		with open(self.label_file) as jsonfile:
+			data_files = json.load(jsonfile)[self.category]
+
+			for file in data_files:
+				sub,trail = files.split("_")
+				data = np.load(os.path.join(self.data_loc,sub,file+".npy"))
+				data_ = transform.transform(data)
+
+				np.save(os.path.join(sav_dat_fol,file+".npy"),data_)
