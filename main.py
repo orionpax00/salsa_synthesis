@@ -12,8 +12,17 @@ parser.add_argument("--overlap",help="overlap for sequence length for which you 
 
 args = parser.parse_args()
 
-getdata = GetData()
+getdata = GetData(config.DATA_LOC,args.category)
+getdata.getdata()
 
+## Spliting into train and testdata
+
+data_loc = os.path.join(os.getcwd(),args.category) #transformed data location
+
+split = Split(location=data_loc, sequence_length = args.seg_len, overlap = args.overlap)
+
+train_data = split.split_train()
+test_data = split.split_test()
 
 
 
