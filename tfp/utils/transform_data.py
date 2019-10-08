@@ -1,6 +1,6 @@
 from scipy.signal import savgol_filter
 import numpy as np
-import os 
+import os
 import json
 import tfp.config.config as config
 
@@ -145,7 +145,7 @@ class Transformation:
         return cart_abs_joints
 
 class GetData:
-	def __init__(self, data_location, catergory, num_joints = 15):
+	def __init__(self, data_location, category, num_joints = 15):
 		self.data_loc = data_location
 		self.category = category
 		self.num_joints = num_joints
