@@ -112,7 +112,7 @@ class Transformation:
         # x coordinates: r * sin(θ) * cos(φ)
         xyz[:,:,0] = rtp[:,:,0] * np.sin(rtp[:,:,1]) * np.cos(rtp[:,:,2])
         # y coordinates: r * sin(θ) * sin(φ)
-        xyz[:,:1] = rtp[:,:,0] * np.sin(rtp[:,:,1]) * np.sin(rtp[:,:,2])
+        xyz[:,:,1] = rtp[:,:,0] * np.sin(rtp[:,:,1]) * np.sin(rtp[:,:,2])
         # z coordinates: r * cos(θ)
         xyz[:,:,2] = rtp[:,:,0] * np.sin(rtp[:,:,1])
         return xyz
@@ -153,7 +153,7 @@ class GetData:
 
 	def getdata(self):
 		sav_dat_fol = os.path.join(os.getcwd,self.category)
-		transform = Transform(self.num_joints)
+		transform = Transformation(self.num_joints)
 		if os.path.exists(sav_dat_fol):
 			continue
 		else:
