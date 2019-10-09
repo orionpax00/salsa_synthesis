@@ -145,7 +145,7 @@ class Transformation:
         return cart_abs_joints
 
 class GetData:
-    def __init__(self, data_location, category, num_joints = 15):
+    def __init__(self, data_location, category, num_joints = 21):
         self.data_loc = data_location
         self.category = category
         self.num_joints = num_joints
