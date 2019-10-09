@@ -45,18 +45,27 @@ class Joint:
 
   def draw(self):
     joints = self.to_dict()
-
-    _data = []
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    ax.set_xlim3d(-50, 10)
+    ax.set_ylim3d(-20, 40)
+    ax.set_zlim3d(-20, 40)
+    xs, ys, zs = [], [], []
     for joint in joints.values():
-      _d = []
-      _d.append(joint.coordinate[0, 0])
-      _d.append(joint.coordinate[1, 0])
-      _d.append(joint.coordinate[2, 0])
+      xs.append(joint.coordinate[0, 0])
+      ys.append(joint.coordinate[1, 0])
+      zs.append(joint.coordinate[2, 0])
+    plt.plot(zs,xs,ys,"b.")
 
-      _data.append(_d)
-
-
-    return _data
+    for joint in joints.values():
+      child = joint
+      if child.parent is not None:
+        parent = child.parent
+        xs = [child.coordinate[0, 0], parent.coordinate[0, 0]]
+        ys = [child.coordinate[1, 0], parent.coordinate[1, 0]]
+        zs = [child.coordinate[2, 0], parent.coordinate[2, 0]]
+        plt.plot(zs, xs, ys, 'r')
+    plt.show()
 
 
   def to_dict(self):
@@ -197,13 +206,11 @@ def parse_amc(file_path):
 
 
 if __name__ == '__main__':
-    # data_loc = '/home/hbuckchash/tfp/transformers-for-pose/subjects'
-    # par_data_loc = '/home/hbuckchash/tfp/transformers-for-pose/npsubjects'
     data_loc = 'D:\\projects\\motion_gen\\tfp\\data\\all_asfamc\\subjects'
     par_data_loc = 'D:\\projects\\motion_gen\\tfp\data\\all_asfamc\\npsubjects'
-    all_sub = os.listdir(data_loc)[1:]
+    all_sub = os.listdir(data_loc)
 
-    for sub in all_sub:
+    for sub in all_sub[100:101]:
         files = os.listdir(os.path.join(data_loc,sub))
         asf_path = [x for x in files if x[-3:] != "amc"]
         amc_files = [x for x in files if x[-3:] == "amc"]
@@ -214,7 +221,7 @@ if __name__ == '__main__':
             joints = parse_asf(os.path.join(data_loc,sub,asf_path[0]))
             motions = parse_amc(amc_loc)
             data = []
-            for motion in motions:
+            for motion in motions[0:5]:
                 joints['root'].set_motion(motion)
                 data.append(joints['root'].draw())
 

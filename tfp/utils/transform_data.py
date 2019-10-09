@@ -47,7 +47,7 @@ class Transformation:
                 q.append(v)
         return order
 
-    def _get_parent_relative_joint_locations(joints_xyz):
+    def _get_parent_relative_joint_locations(self,joints_xyz):
         """
         Params:
         joints_xyz: joint locations in different frames in Cartesian coordinates
@@ -62,7 +62,7 @@ class Transformation:
 
         return rel_joints_xyz
 
-    def _get_abs_joint_locations(rel_joints_xyz):
+    def _get_abs_joint_locations(self,rel_joints_xyz):
         """
         Params:
         rel_joints_xyz: location of every joint relative to their respective parents
@@ -85,7 +85,7 @@ class Transformation:
         return abs_joints_xyz
 
 
-    def _cart2sph(xyz):
+    def _cart2sph(self,xyz):
         """
         Assumed shape: [number_frames,number_joints,3]
         """
@@ -103,7 +103,7 @@ class Transformation:
         return rtp
 
 
-    def _sph2cart(rtp):
+    def _sph2cart(self,rtp):
         """
         Assumed shape: [number_frames,number_joints,3]
         """
@@ -118,7 +118,7 @@ class Transformation:
         return xyz
 
 
-    def transform(joints, head_length=2.0):
+    def transform(self,joints, head_length=2.0):
         """
         Params:
         joints : the absolute joint coordinates of every frame before normalization
@@ -130,17 +130,17 @@ class Transformation:
         # The absolute Cartesian coordinates of root joints of every frame
         self.abs_root_xyz = joints[:,self.root]
         # The Cartesian coordinates of all the joints relative to their respective parents
-        rel_joints_xyz = _get_parent_relative_joint_locations(joints)
+        rel_joints_xyz = self._get_parent_relative_joint_locations(joints)
         # The unnormalized joint coordinates in Spherical coordinate system
-        sph_rel_joints = _cart2sph(rel_joints_xyz)
+        sph_rel_joints = self. _cart2sph(rel_joints_xyz)
         # normalization of limb lengths
         fixed_limb_lengths = head_length * self.limb_ratios
         # Replace the limb lengths with unnormalized limb lengths
         sph_rel_joints[:, 0] = fixed_limb_lengths
         # Convert Spherical coordinates back to Cartesian coordinates
-        cart_rel_joints = _sph2cart(sph_rel_joints)
+        cart_rel_joints = self._sph2cart(sph_rel_joints)
         # Recover the absolute coordinates
-        cart_abs_joints = _get_abs_joint_locations(cart_rel_joints, sk_data=sk_data)
+        cart_abs_joints = self._get_abs_joint_locations(cart_rel_joints)
 
         return cart_abs_joints
 

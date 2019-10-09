@@ -1,6 +1,6 @@
 import os
 
-DATA_LOC = os.path.join(os.getcwd(),"data")
+DATA_LOC = os.path.join(os.getcwd(),"data") #complete data folder
 
 SPLIT_JSON_LOC = os.path.join(os.getcwd(),"tfp", "config", "split.json")
 
