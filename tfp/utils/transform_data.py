@@ -130,41 +130,41 @@ class Transformation:
         # The absolute Cartesian coordinates of root joints of every frame
         self.abs_root_xyz = joints[:,self.root]
         # The Cartesian coordinates of all the joints relative to their respective parents
-        rel_joints_xyz = get_parent_relative_joint_locations(joints)
+        rel_joints_xyz = _get_parent_relative_joint_locations(joints)
         # The unnormalized joint coordinates in Spherical coordinate system
-        sph_rel_joints = cart2sph(rel_joints_xyz)
+        sph_rel_joints = _cart2sph(rel_joints_xyz)
         # normalization of limb lengths
         fixed_limb_lengths = head_length * self.limb_ratios
         # Replace the limb lengths with unnormalized limb lengths
         sph_rel_joints[:, 0] = fixed_limb_lengths
         # Convert Spherical coordinates back to Cartesian coordinates
-        cart_rel_joints = sph2cart(sph_rel_joints)
+        cart_rel_joints = _sph2cart(sph_rel_joints)
         # Recover the absolute coordinates
-        cart_abs_joints = get_abs_joint_locations(cart_rel_joints, sk_data=sk_data)
+        cart_abs_joints = _get_abs_joint_locations(cart_rel_joints, sk_data=sk_data)
 
         return cart_abs_joints
 
 class GetData:
-	def __init__(self, data_location, category, num_joints = 15):
-		self.data_loc = data_location
-		self.category = category
-		self.num_joints = num_joints
-		self.label_file = config.LABEL_JSON_LOC
+    def __init__(self, data_location, category, num_joints = 15):
+        self.data_loc = data_location
+        self.category = category
+        self.num_joints = num_joints
+        self.label_file = config.LABEL_JSON_LOC
 
-	def getdata(self):
-		sav_dat_fol = os.path.join(os.getcwd,self.category)
-		transform = Transformation(self.num_joints)
-		if os.path.exists(sav_dat_fol):
-			continue
-		else:
-			os.mkdir(sav_dat_fol)
+    def getdata(self):
+        
+        sav_dat_fol = os.path.join(os.getcwd,self.category)
+        transform = Transformation(self.num_joints)
 
-		with open(self.label_file) as jsonfile:
-			data_files = json.load(jsonfile)[self.category]
+        if not os.path.exists(sav_dat_fol):
+            os.mkdir(sav_dat_fol)
+        
+        with open(self.label_file) as jsonfile:
+            data_files = json.load(jsonfile)[self.category]
 
-			for file_ in data_files:
-				sub,trail = file_.split("_")
-				data = np.load(os.path.join(self.data_loc,sub,file_+".npy"))
-				data_ = transform.transform(data)
+            for file_ in data_files:
+                sub,trail = file_.split("_")
+                data = np.load(os.path.join(self.data_loc,sub,file_+".npy"))
+                data_ = transform.transform(data)
 
-				np.save(os.path.join(sav_dat_fol,file_+".npy"),data_)
+                np.save(os.path.join(sav_dat_fol,file_+".npy"),data_)

@@ -22,7 +22,7 @@ data_loc = os.path.join(os.getcwd(),args.category) #transformed data location
 split = Split(location=data_loc, sequence_length = args.seg_len, overlap = args.overlap)
 
 train_data = split.split_train()
-test_data = split.split_test()
+
 
 
 

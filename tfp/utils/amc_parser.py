@@ -198,8 +198,8 @@ def parse_amc(file_path):
 
 
 if __name__ == '__main__':
-    data_loc = 'D:\\projects\\motion_gen\\tfp\\data\\all_asfamc\\subjects'
-    par_data_loc = 'D:\\projects\\motion_gen\\tfp\\data\\all_asfamc\\np_subjects'
+    data_loc = '/home/hbuckchash/tfp/transformers-for-pose/subjects'
+    par_data_loc = '/home/hbuckchash/tfp/transformers-for-pose/npsubjects'
     all_sub = os.listdir(data_loc)[1:]
 
     for sub in all_sub:

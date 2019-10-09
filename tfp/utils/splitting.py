@@ -106,7 +106,7 @@ class Split:
 			for i in range(num_bat):
 				comp_data.append(data[i * self.stride : self.seq_length + i * self.stride])
 
-		comp_data.random.shuffle(comp_data)
+			comp_data.random.shuffle(comp_data)
 
 			# np.save(os.path.join(self.folder_location,'data','data.npy'), np.asarray(comp_data))
 
