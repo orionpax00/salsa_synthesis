@@ -23,6 +23,14 @@ JOINT_NAMES = {
                    'right_foot', 'left_foot',
                ]
               }
+
+
+##Indexes of joint for 21 joint skeleton from total 31 joints
+JOINT_INDEX = {
+			21 : [0,1,2,3,4,6,7,8,9,11,13,15,16,17,18,20,21,24,25,27,28],
+			15 : [0,1,2,3,6,7,8,13,16,17,18,20,24,25,27]
+		}
+
 LIMB_RATIOS = {
                 21 : [2.0, 2.5,
                        1.37, 2.8, 2.4,
