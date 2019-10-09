@@ -12,6 +12,17 @@ PARENT_LIMBS = {
         15 : [0, 0, 1, 2, 3, 1, 5, 6, 1, 0, 9, 10, 0, 12,13]
         }
 
+JOINT_NAMES = {
+                21:['head_top', 'neck',
+                   'right_shoulder', 'right_elbow', 'right_wrist',
+                   'left_shoulder', 'left_elbow', 'left_wrist',
+                   'right_hip', 'right_knee', 'right_ankle',
+                   'left_hip', 'left_knee', 'left_ankle',
+                   'pelvis', 'spine', 'head',
+                   'right_hand', 'left_hand',
+                   'right_foot', 'left_foot',
+               ]
+              }
 LIMB_RATIOS = {
                 21 : [2.0, 2.5,
                        1.37, 2.8, 2.4,
