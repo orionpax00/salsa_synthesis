@@ -201,7 +201,7 @@ if __name__ == '__main__':
     # par_data_loc = '/home/hbuckchash/tfp/transformers-for-pose/npsubjects'
     data_loc = 'D:\\projects\\motion_gen\\tfp\\data\\all_asfamc\\subjects'
     par_data_loc = 'D:\\projects\\motion_gen\\tfp\data\\all_asfamc\\npsubjects'
-    all_sub = os.listdir(data_loc)[1:]
+    all_sub = os.listdir(data_loc)
 
     for sub in all_sub:
         files = os.listdir(os.path.join(data_loc,sub))

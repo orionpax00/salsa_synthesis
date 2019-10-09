@@ -51,10 +51,11 @@ class Joint:
     ax.set_ylim3d(-20, 40)
     ax.set_zlim3d(-20, 40)
     xs, ys, zs = [], [], []
-    for joint in joints.values():
+    for counter,joint in enumerate(joints.values()):
       xs.append(joint.coordinate[0, 0])
       ys.append(joint.coordinate[1, 0])
       zs.append(joint.coordinate[2, 0])
+      ax.text(joint.coordinate[2, 0],joint.coordinate[0, 0],joint.coordinate[1, 0],  '%s' % (str(counter)), size=20, zorder=1, color='k')
     plt.plot(zs,xs,ys,"b.")
 
     for joint in joints.values():
@@ -210,7 +211,7 @@ if __name__ == '__main__':
     par_data_loc = 'D:\\projects\\motion_gen\\tfp\data\\all_asfamc\\npsubjects'
     all_sub = os.listdir(data_loc)
 
-    for sub in all_sub[100:101]:
+    for sub in all_sub:
         files = os.listdir(os.path.join(data_loc,sub))
         asf_path = [x for x in files if x[-3:] != "amc"]
         amc_files = [x for x in files if x[-3:] == "amc"]
@@ -218,6 +219,8 @@ if __name__ == '__main__':
         for amc in amc_files:
             loc = os.path.join(par_data_loc, sub, amc[0:-4]+".npy")
             amc_loc = os.path.join(data_loc,sub,amc)
+            print(amc_loc)
+
             joints = parse_asf(os.path.join(data_loc,sub,asf_path[0]))
             motions = parse_amc(amc_loc)
             data = []
