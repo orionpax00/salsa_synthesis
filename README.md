@@ -36,6 +36,10 @@ pip install -e . ## for those who want to develop
 |-- main.py ##train model
 ```
 
+## RUN
+```bash
+python main.py salsa --first_time True --seq_len 100 --overlap 0
+```
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.

@@ -8,6 +8,11 @@ import numpy as np
 from tfp.config.config import SPLIT_JSON_LOC
 
 class Split:
+	r"""
+		This class generate Training data using the folder created by getData class
+
+		returns an array of shape (None, seg_len, num_joints, 3)
+	"""
 
 	def __init__(self,location=None,sequence_length = 100, overlap = 0,split_size=20):
 		# pramaters

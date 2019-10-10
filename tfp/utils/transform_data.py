@@ -145,6 +145,11 @@ class Transformation:
         return cart_abs_joints
 
 class GetData:
+    r"""
+        This class pick up the numpy files related to the input category
+        and transform data using above functions, and after transformation store
+        all file in th foder @<ROOT_of_REPO>/category
+    """
     def __init__(self, data_location, category, num_joints = 21):
         self.data_loc = data_location
         self.category = category
