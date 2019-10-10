@@ -152,25 +152,26 @@ class GetData:
         self.label_file = config.LABEL_JSON_LOC
 
     def getdata(self):
-        
-        sav_dat_fol = os.path.join(os.getcwd,self.category)
+
+        sav_dat_fol = os.path.join(os.getcwd(),self.category)
         transform = Transformation(self.num_joints)
-		print("data transformation started.......")
+        print("data transformation started.......")
         if not os.path.exists(sav_dat_fol):
             os.mkdir(sav_dat_fol)
-        
+
         with open(self.label_file) as jsonfile:
             data_files = json.load(jsonfile)[self.category]
 
             for file_ in data_files:
                 sub,trail = file_.split("_")
                 data = np.load(os.path.join(self.data_loc,sub,file_+".npy"))
-				
-				_onlyjoint_data = []
-				for frame in data:
-					_onlyjoint_data.append(frame[np.asarray(config.JOINT_INDEX[self.num_joints])])
-                _data = transform.transform(np.asarray(_onlyjoint_data))
 
-                np.save(os.path.join(sav_dat_fol,file_+".npy"),_data)i
-		print("data transformation ended....")
-		return None
+                _onlyjoint_data = []
+                for frame in data:
+                	_onlyjoint_data.append(frame[np.asarray(config.JOINT_INDEX[self.num_joints])])
+                _data = transform.transform(np.asarray(_onlyjoint_data))
+                # _data = _onlyjoint_data
+
+                np.save(os.path.join(sav_dat_fol,file_+".npy"),_data)
+        print("data transformation ended....")
+        return None

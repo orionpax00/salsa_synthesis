@@ -18,7 +18,7 @@ class Split:
 		self.split_string = str(sequence_length) + "_" + str(overlap) + "_" + str(split_size)
 		self.strides = self.seq_len - math.ceil(self.overlap * self.seq_len / 100)
 		## function
-		self.getfiles = self.get_files()
+		self._getfiles = self.get_files()
 		self.checkcomb = self.check_comb()
 
 	def check_comb(self):
@@ -42,56 +42,59 @@ class Split:
 	def gen_split(self):
 		""" function to divide trails into train trials and split trails"""
 
-		files = self.getfiles()
-		num_test_trails = math.floor(len(files) * self.split_size)
-		shuffled = np.random.shuffle(files)
-		train_trails = shuffled[num_test_trails:]
-		test_trails = shuffled[:num_test_trails]
+		files = self._getfiles
+
+		num_test_trails = math.floor(len(files) * (self.split_size)//100)
+		np.random.shuffle(files)
+		train_trails = files[num_test_trails:]
+		test_trails = files[:num_test_trails]
 
 		return train_trails, test_trails
 	def split_train(self):
 		if self.checkcomb:
-			with open(SPLIT_JSON_LOC) as jsonfile:
+			with open(SPLIT_JSON_LOC,'r') as jsonfile:
 				data = json.load(jsonfile)
 				train_splits = data[self.split_string]['train_splits']
 				test_splits = data[self.split_string]['test_splits']
 		else:
 			train_splits, test_splits = self.gen_split()
-			with open(SPLIT_JSON_LOC,'rw') as jsonfile:
+			data = None
+			with open(SPLIT_JSON_LOC,"r") as jsonfile:
 				data = json.load(jsonfile)
-				data[self.split_string] = { "train_splits" : train_splits, "test_splits":test_splits}
+			with open(SPLIT_JSON_LOC,"w") as jsonfile:
+				data[self.split_string] = { "train_splits" : list(train_splits), "test_splits":list(test_splits)}
 				json.dump(data,jsonfile)
 
 		comp_data = []
-		for file in train_split:
-			loc = os.path.join(self.folder_location,file)
+		for _file in train_splits:
+			loc = os.path.join(self.folder_location,_file)
 			data = np.load(loc)
 			if data.shape[0] < self.seq_len:
 				break
-			#data = data[:-(data.shape[0] % self.seq_len)
 
-			num_bat = (data.shape[0] - self.seq_len)//(self.stride) + 1
+			num_bat = (data.shape[0] - self.seq_len)//(self.strides) + 1
+			print(data.shape)
+			print(num_bat)
 			for i in range(num_bat):
-				comp_data.append(data[i * self.stride : self.seq_length + i * self.stride])
+				comp_data.append(data[i * self.strides : self.seq_len + i * self.strides])
 
-		comp_data.random.shuffle(comp_data)
-
-		# np.save(os.path.join(self.folder_location,'data','data.npy'), np.asarray(comp_data))
 
 		return np.asarray(comp_data)
 
 
 	def split_test(self):
 		if self.checkcomb:
-			with open(SPLIT_JSON_LOC) as jsonfile:
+			with open(SPLIT_JSON_LOC,'r') as jsonfile:
 				data = json.load(jsonfile)
 				train_splits = data[self.split_string]['train_splits']
 				test_splits = data[self.split_string]['test_splits']
 		else:
 			train_splits, test_splits = self.gen_split()
-			with open(SPLIT_JSON_LOC,'rw') as jsonfile:
+			data = None
+			with open(SPLIT_JSON_LOC,"r") as jsonfile:
 				data = json.load(jsonfile)
-				data[self.split_string] = { "train_splits" : train_splits, "test_splits":test_splits}
+			with open(SPLIT_JSON_LOC,"w") as jsonfile:
+				data[self.split_string] = { "train_splits" : list(train_splits), "test_splits":list(test_splits)}
 				json.dump(data,jsonfile)
 
 		comp_data = []
@@ -100,14 +103,9 @@ class Split:
 			data = np.load(loc)
 			if data.shape[0] < self.seq_len:
 				break
-			#data = data[:-(data.shape[0] % self.seq_len)
 
-			num_bat = (data.shape[0] - self.seq_len)//(self.stride) + 1
+			num_bat = (data.shape[0] - self.seq_len)//(self.strides) + 1
 			for i in range(num_bat):
-				comp_data.append(data[i * self.stride : self.seq_length + i * self.stride])
-
-			comp_data.random.shuffle(comp_data)
-
-			# np.save(os.path.join(self.folder_location,'data','data.npy'), np.asarray(comp_data))
+				comp_data.append(data[i * self.strides : self.seq_len + i * self.strides])
 
 			return np.asarray(comp_data)

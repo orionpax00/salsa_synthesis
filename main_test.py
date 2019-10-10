@@ -4,7 +4,7 @@ import tfp.config.config as config
 from tfp.utils.transform_data import GetData
 from tfp.utils.splitting import Split
 
-
+#some helper functions
 def str_to_bool(value):
     if isinstance(value, bool):
         return value
@@ -29,20 +29,28 @@ parser.add_argument("--first_time",
                     help="transformed data available or not")
 
 args = parser.parse_args()
+
 def _prepareData(args):
     r"""
         Prepare Data for given catergory
         if --first_time = TRUE then create category folder at root of repo,
         copy transformed file in that folder
     """
-    getdata = GetData(config.DATA_LOC,args.category)
-    getdata.getdata()
+    # getdata = GetData(config.DATA_LOC,args.category)
+    # getdata.getdata()
+
+    return None
+
+
+
+
+
 
 
 
 
 if __name__ == "__main__":
-    print(os.getcwd())
+    # print(os.getcwd())
     if bool(args.first_time):
         _prepareData(args)
 
