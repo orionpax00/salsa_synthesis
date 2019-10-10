@@ -9,11 +9,13 @@ parser = argparse.ArgumentParser(description="Training Information")
 parser.add_argument("category",help="The catergory of data for which you have to train")
 parser.add_argument("--seq_len",help="Sequence length for which you have to train")
 parser.add_argument("--overlap",help="overlap for sequence length for which you have to train")
+parser.add_argument("--first_time", type=str2bool, default=True, help="transformed data available or not")
 
 args = parser.parse_args()
 
-getdata = GetData(config.DATA_LOC,args.category)
-getdata.getdata()
+if first_time:
+    getdata = GetData(config.DATA_LOC,args.category)
+    getdata.getdata()
 
 ## Spliting into train and testdata
 

@@ -12,24 +12,38 @@ PARENT_LIMBS = {
         15 : [0, 0, 1, 2, 3, 1, 5, 6, 1, 0, 9, 10, 0, 12,13]
         }
 
-JOINT_NAMES = {
-                21:['head_top', 'neck',
-                   'right_shoulder', 'right_elbow', 'right_wrist',
-                   'left_shoulder', 'left_elbow', 'left_wrist',
-                   'right_hip', 'right_knee', 'right_ankle',
-                   'left_hip', 'left_knee', 'left_ankle',
-                   'pelvis', 'spine', 'head',
-                   'right_hand', 'left_hand',
-                   'right_foot', 'left_foot',
-               ]
-              }
-
 
 ##Indexes of joint for 21 joint skeleton from total 31 joints
 JOINT_INDEX = {
 			21 : [0,1,2,3,4,6,7,8,9,11,13,15,16,17,18,20,21,24,25,27,28],
 			15 : [0,1,2,3,6,7,8,13,16,17,18,20,24,25,27]
 		}
+
+JOINT_LABELS = {
+            21: [
+                "pelvis",
+                "left_hip",
+                "left_knee",
+                "left_ankle",
+                "left_foot",
+                "right_hip",
+                "right_knee",
+                "right_ankle",
+                "right_foot",
+                "spine",
+                "bottom_neck",
+                "bottom_head",
+                "head_top",
+                "left_shoulder",
+                "left_elbow",
+                "left_waist",
+                "left_hand",
+                "right_shoulder",
+                "right_elbow",
+                "right_wrist",
+                "right_hand"
+            ]
+        }
 
 LIMB_RATIOS = {
                 21 : [2.0, 2.5,
