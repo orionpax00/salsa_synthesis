@@ -9,6 +9,33 @@ virtualenv env
 pip install -e . ## for those who want to develop
 ```
 
+## Projects Structure
+```bash
+|-- subjects
+  |-- 01
+    |-- 01_01.asf
+    |-- 01_01.amc
+    |-- 01_02.amc
+    .
+    .
+|-- npsubjects #this folder will be generated when you run the tfp/resources/amc_to_numpy.py
+  |-- 01
+    |-- 01_01.npy
+    |-- 01_01.npy
+    .
+    .
+|-- tfp
+  |-- config
+    |--
+  |-- resources
+    |--
+  |-- utils
+    |--
+  |-- models
+    |--
+|-- main.py ##train model
+```
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
