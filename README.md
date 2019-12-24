@@ -1,4 +1,7 @@
-# Transformers For Pose
+# Salsa Dance Synthesis
+
+[![Watch the video](https://img.youtube.com/vi/Dck-0xfV5lk/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dck-0xfV5lk)
+
 
 ## Installation
 
