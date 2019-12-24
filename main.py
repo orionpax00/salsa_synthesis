@@ -3,6 +3,7 @@ import argparse
 import time
 
 import tensorflow as tf
+import numpy as np
 import tfp.config.config as config
 from tfp.utils.transform_data import GetData
 from tfp.utils.splitting import Split
@@ -83,6 +84,7 @@ if __name__ == "__main__":
     train_dataset = tf.data.Dataset.from_tensor_slices(train_data).shuffle(BUFFER_SIZE)
 
     seed = tf.random.normal([21, 3])
+    seed = tf.expand_dims(seed,0)
 
     cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
     generator_optimizer = tf.keras.optimizers.Adam(1e-4)
@@ -95,7 +97,25 @@ if __name__ == "__main__":
     generator = make_generator_model()
 
     discriminator = make_discriminator_model()
+    tf.keras.utils.plot_model(
+        generator,
+        to_file='generator.png',
+        show_shapes=True,
+        show_layer_names=True,
+        rankdir='TB',
+        expand_nested=True,
+        dpi=96
+    )
+    tf.keras.utils.plot_model(
+        discriminator,
+        to_file='discriminator.png',
+        show_shapes=True,
+        show_layer_names=True,
+        rankdir='TB',
+        expand_nested=True,
+        dpi=96
+    )
  
 
-    train(train_dataset, EPOCHS)
+    # train(train_dataset, EPOCHS)
         

@@ -1,7 +1,15 @@
 # Salsa Dance Synthesis
 <p align="center">
 
-<img src="data/tool/salsa_dance.gif">
+<img src="docs/img/salsa_dance.gif">
+
+</p>
+
+## Model And Its Architecture
+
+<p align="center">
+
+<img src="docs/img/model.png">
 
 </p>
 
@@ -43,7 +51,7 @@ pip install -e . ## for those who want to develop
 
 ## RUN
 ```bash
-python main.py salsa --first_time True --seq_len 100 --overlap 0
+python main_cmdline.py salsa --first_time True --seq_len 100 --overlap 0
 ```
 ## Contributing
 
