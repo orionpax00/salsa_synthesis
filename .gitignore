@@ -1,6 +1,6 @@
 .vscode
 env
-data
+data/all_asfamc
 tfp.egg-info
 subjects
 npsubjects

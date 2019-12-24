@@ -1,7 +1,9 @@
 # Salsa Dance Synthesis
+<p align="center">
 
-[![Watch the video](https://img.youtube.com/vi/Dck-0xfV5lk/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dck-0xfV5lk)
+<img src="data/tool/salsa_dance.gif">
 
+</p>
 
 ## Installation
 
