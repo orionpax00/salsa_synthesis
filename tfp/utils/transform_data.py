@@ -159,7 +159,7 @@ class GetData:
     def getdata(self):
 
         sav_dat_fol = os.path.join(os.getcwd(),self.category)
-        transform = Transformation(self.num_joints)
+        # transform = Transformation(self.num_joints)
         print("data transformation started.......")
         if not os.path.exists(sav_dat_fol):
             os.mkdir(sav_dat_fol)
@@ -174,8 +174,8 @@ class GetData:
                 _onlyjoint_data = []
                 for frame in data:
                 	_onlyjoint_data.append(frame[np.asarray(config.JOINT_INDEX[self.num_joints])])
-                _data = transform.transform(np.asarray(_onlyjoint_data))
-                # _data = _onlyjoint_data
+                # _data = transform.transform(np.asarray(_onlyjoint_data))
+                _data = _onlyjoint_data
 
                 np.save(os.path.join(sav_dat_fol,file_+".npy"),_data)
         print("data transformation ended....")

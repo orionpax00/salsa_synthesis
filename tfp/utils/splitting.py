@@ -78,8 +78,6 @@ class Split:
 				break
 
 			num_bat = (data.shape[0] - self.seq_len)//(self.strides) + 1
-			print(data.shape)
-			print(num_bat)
 			for i in range(num_bat):
 				comp_data.append(data[i * self.strides : self.seq_len + i * self.strides])
 
