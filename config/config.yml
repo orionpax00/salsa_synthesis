@@ -1,0 +1,5 @@
+DATA:
+    DATA_LOC: "D:\\projects\\motion_gen\\tfp\\salsa\\60"
+
+PARAMETERS:
+    EPOCHS: 5
